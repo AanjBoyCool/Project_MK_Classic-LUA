@@ -9,11 +9,11 @@ function love.load()
 end
 
 function bg.move(dt)
-    if bg.x <= -160 then
-        bg.x = -160
+    if bg.x <= -150 then
+        bg.x = bg.x + 200 * dt
     end
     if bg.x >= 0 then
-        bg.x = 0
+        bg.x = bg.x - 200 * dt
     end
 end
 

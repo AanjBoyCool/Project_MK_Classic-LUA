@@ -67,6 +67,12 @@ function player.update(dt) -- The Main function that updates everything that hap
 isMoving = false
 player.JumpHandling(dt)
 
+
+if love.keyboard.isDown("left") and isJumping or love.keyboard.isDown("right") and isJumping then
+    isMoving = false
+    isJumping = false
+end
+
 if player.anim == player.animations.jump and player.anim.position >= #player.anim.frames then
     isJumping = false
     player.anim:gotoFrame(1)
