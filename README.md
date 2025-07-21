@@ -30,3 +30,9 @@ Created by Enrique García Cota (kikito)
 Licensed under the MIT License
 [https://github.com/kikito/anim8]
 [https://github.com/kikito]  
+
+Love2D Engine :
+Licensed under the liberal zlib/libpng License
+[https://love2d.org/]
+[https://github.com/love2d/love]
+[https://github.com/love2d]
