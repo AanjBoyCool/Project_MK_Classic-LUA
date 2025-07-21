@@ -20,7 +20,7 @@ player.animations.idle = anim8.newAnimation( player.gridIdle('2 - 7', 1), 0.2 )
 player.animations.jump = anim8.newAnimation( player.gridJump('13 - 18', 2), 0.2 )
 
 player.anim = player.animations.idle
-function player.load()
+function player.load() -- The Main function that loads everything but its kinda useless over here soooo not using it lol
 end
 
 function player.bgEnd(dt)
@@ -33,7 +33,7 @@ function player.bgEnd(dt)
 end
 
 
-function player.JumpHandling(dt)
+function player.JumpHandling(dt) -- This maintains the part of the jump and gravity processing
     if isJumping then
         player.y = player.y - player.gravity 
     end
@@ -41,7 +41,7 @@ end
 
 
 
-function player.gravityFunction(dt)
+function player.gravityFunction(dt) -- This maintains the gravity processing
 
     if not isJumping then
         player.y = player.y + player.gravity 
@@ -56,14 +56,14 @@ function player.gravityFunction(dt)
     end
 end
 
-function player.keypressed(key)
+function player.keypressed(key) -- For stating whether the player actually pressed the jump key or not
     if key == "up" then
         player.anim = player.animations.jump
         isJumping = true
     end
 end
 
-function player.update(dt)
+function player.update(dt) -- The Main function that updates everything that happens in it
 isMoving = false
 player.JumpHandling(dt)
 
@@ -95,7 +95,7 @@ end
 end
 
 
-function player.draw()
+function player.draw() -- The main function that draws everything
     player.anim:draw(player.spriteSheet, player.x, player.y, nil, 2)
 end
 
