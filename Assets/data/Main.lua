@@ -29,9 +29,9 @@ function love.update(dt)
     player.update(dt)
 end
 
-function cool()
+function love.keypressed(key)
+    player.keypressed(key)
 end
-
 
 function love.draw()
     love.graphics.draw(bg.image, bg.x, bg.y, 0, 2.7, 2.35)

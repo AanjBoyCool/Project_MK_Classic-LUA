@@ -1,7 +1,8 @@
 love.graphics.setDefaultFilter("nearest", "nearest") -- Helps to not smoothen out the pixels so that its not blurry
 local anim8 = require("libraries/anim8") -- Spritesheet file
 local player = {} -- Player Variable
-
+local isMoving = false
+local isJumping = false
 player.x = love.graphics.getWidth() / 2
 player.y = 300
 player.groundY = 300
@@ -32,6 +33,8 @@ function player.bgEnd(dt)
 end
 
 
+
+
 function player.gravityFunction(dt)
 
     if love.keyboard.isDown("up") then
@@ -48,10 +51,22 @@ function player.gravityFunction(dt)
     end
 end
 
+function player.keypressed(key)
+    if key == "up" then
+        player.anim = player.animations.jump
+        isJumping = true
+    end
+end
+
 function player.update(dt)
+isMoving = false
+if player.anim == player.animations.jump and player.anim.position >= #player.anim.frames then
+    isJumping = false
+    player.anim:gotoFrame(1)
+end
+
     player.bgEnd(dt)
     player.gravityFunction(dt)
-    local isMoving = false
     if love.keyboard.isDown("left") then
         player.x = player.x - player.speed * dt
         player.anim = player.animations.walk2
@@ -63,12 +78,8 @@ function player.update(dt)
         player.anim = player.animations.walk
         isMoving = true
     end
-    if love.keyboard.isDown("up") then
-        isMoving = true
-        player.anim = player.animations.jump
-    end
 
-    if isMoving == false then
+    if isMoving == false and isJumping == false then
         player.anim = player.animations.idle
     end
 
