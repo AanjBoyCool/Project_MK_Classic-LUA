@@ -17,6 +17,7 @@ What you can do is post your opinions of this project on social media or even ma
 If you want to read more about this license just click on the license file!
 
 Thanks for reading this and say safe and LEGAL!]
+Also just a reminder, some of the spritesheets might be copyrighted because of the original game Mortal Kombat before you say anything, this is a passion project, a test and i really want it to be succesful and for people to actually play it so thanks.
 
 
 CREDITS - 
