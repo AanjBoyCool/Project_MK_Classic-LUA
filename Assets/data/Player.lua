@@ -33,14 +33,18 @@ function player.bgEnd(dt)
 end
 
 
+function player.JumpHandling(dt)
+    if isJumping then
+        player.y = player.y - player.gravity 
+    end
+end
+
 
 
 function player.gravityFunction(dt)
 
-    if love.keyboard.isDown("up") then
-        player.y = player.y - player.gravity
-    else
-        player.y = player.y + player.gravity
+    if not isJumping then
+        player.y = player.y + player.gravity 
     end
 
     if player.y >= player.groundY then
@@ -48,6 +52,7 @@ function player.gravityFunction(dt)
     end
     if player.y <=100 then
         player.y = 100
+
     end
 end
 
@@ -60,6 +65,8 @@ end
 
 function player.update(dt)
 isMoving = false
+player.JumpHandling(dt)
+
 if player.anim == player.animations.jump and player.anim.position >= #player.anim.frames then
     isJumping = false
     player.anim:gotoFrame(1)
