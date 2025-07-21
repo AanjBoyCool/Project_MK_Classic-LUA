@@ -33,6 +33,13 @@ Licensed under the MIT License
 
 Love2D Engine :
 Licensed under the liberal zlib/libpng License
+Created by the Love2D team
 [https://love2d.org/]
 [https://github.com/love2d/love]
 [https://github.com/love2d]
+
+Tutorials:
+I learned lua and love2D because of tutorials from - 
+Challacade - 
+[https://github.com/challacade]
+[https://www.youtube.com/@Challacade]
