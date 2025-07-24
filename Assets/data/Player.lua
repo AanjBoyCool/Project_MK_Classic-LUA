@@ -3,6 +3,7 @@ local anim8 = require("libraries/anim8") -- Spritesheet file
 local player = {} -- Player Variable
 local isMoving = false
 local isJumping = false
+local isPunching = false
 player.x = love.graphics.getWidth() / 2
 player.y = 300
 player.groundY = 300
@@ -10,6 +11,7 @@ player.gravity = 10
 player.speed = 200
 player.spriteSheet = love.graphics.newImage('sprites/Scorpion.png')
 player.grid = anim8.newGrid( 57, 120, player.spriteSheet:getWidth(), player.spriteSheet:getHeight() )
+player.gridPunch = anim8.newGrid( 57, 120, player.spriteSheet:getWidth(), player.spriteSheet:getHeight() )
 player.gridIdle = anim8.newGrid( 60, 120, player.spriteSheet:getWidth(), player.spriteSheet:getHeight() )
 player.gridJump = anim8.newGrid( 56, 120, player.spriteSheet:getWidth(), player.spriteSheet:getHeight() )
 
@@ -18,6 +20,7 @@ player.animations.walk = anim8.newAnimation( player.grid('1 - 8', 2), 0.2 )
 player.animations.walk2 = anim8.newAnimation( player.grid('8 - 1', 2), 0.2 )
 player.animations.idle = anim8.newAnimation( player.gridIdle('2 - 7', 1), 0.2 )
 player.animations.jump = anim8.newAnimation( player.gridJump('13 - 18', 2), 0.2 )
+player.animations.punch = anim8.newAnimation( player.gridPunch('1 - 3', 4), 0.2 )
 
 player.anim = player.animations.idle
 function player.load() -- The Main function that loads everything but its kinda useless over here soooo not using it lol
@@ -61,12 +64,28 @@ function player.keypressed(key) -- For stating whether the player actually press
         player.anim = player.animations.jump
         isJumping = true
     end
+    if key == "z" then
+        isPunching = true
+    end
+end
+
+
+function player.punchHandling(dt)
+    if isPunching then
+        player.anim = player.animations.punch
+    end
 end
 
 function player.update(dt) -- The Main function that updates everything that happens in it
 isMoving = false
 player.JumpHandling(dt)
+player.punchHandling(dt)
 
+
+if player.anim == player.animations.punch and player.anim.position >= #player.anim.frames then
+    isPunching = false
+    player.anim:gotoFrame(1)
+end
 
 if love.keyboard.isDown("left") and isJumping or love.keyboard.isDown("right") and isJumping then
     isMoving = false
@@ -86,13 +105,14 @@ end
         isMoving = true
     end
 
+
     if love.keyboard.isDown("right") then
         player.x = player.x + player.speed * dt
         player.anim = player.animations.walk
         isMoving = true
     end
 
-    if isMoving == false and isJumping == false then
+    if isMoving == false and isJumping == false and isPunching == false then
         player.anim = player.animations.idle
     end
 
